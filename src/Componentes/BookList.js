@@ -6,7 +6,7 @@ render(){
     return(
         <ol className="books-grid">
        { this.props.allBooks.map((books , index) => {
-       return books.shelf === this.props.shelf.split(' ').join('').toLowerCase() ? <li key={index}>
+       return <li key={index}>
              <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
@@ -24,7 +24,6 @@ render(){
                 <div className="book-authors">Harper Lee</div>
              </div>
       </li>
-      : ""
     })}
       </ol>
     )

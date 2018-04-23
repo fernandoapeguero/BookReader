@@ -22,23 +22,30 @@ class BookShelf extends Component {
 render(){
 
   return(
-      <div>
-    {this.state.bookstands.map((stands, index) => {
-     console.log(this.state.books)
-      return  <div key={index} className="bookshelf">
-        <h2 className="bookshelf-title">{stands}</h2>
-          <div className="bookshelf-books">
-
-              <BookList allBooks={this.state.books} shelf={stands.trim()} />
-
-           </div>
-        </div>
-
-    })}
+    <div>
+    <div  className="bookshelf">
+       <h2 className="bookshelf-title">Currently Reading</h2>
+       <div className="bookshelf-books">
+          <BookList allBooks={this.state.books.filter(book => book.shelf === 'currentlyReading')}  />
+       </div>
+    </div>
+    <div className="bookshelf">
+       <h2 className="bookshelf-title">Want to Read</h2>
+       <div className="bookshelf-books">
+          <BookList allBooks={this.state.books.filter(book => book.shelf === "wantToRead")}  />
+       </div>
+    </div>
+    <div  className="bookshelf">
+       <h2 className="bookshelf-title">Read</h2>
+       <div className="bookshelf-books">
+          <BookList allBooks={this.state.books.filter(book => book.shelf === "read")}  />
+       </div>
+    </div>
     <div className="open-search">
-              <Link to="/Search" >Add a book</Link>
+       <Link to="/Search" >
+       Add a book</Link>
     </div>
-    </div>
+ </div>
    )
  }
 
