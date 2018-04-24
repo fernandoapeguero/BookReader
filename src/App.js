@@ -2,6 +2,7 @@ import React from 'react'
 import {Route} from 'react-router-dom'
 import BookShelf from './Componentes/BookShelf'
 import BooksSearch from './Componentes/BookSearch'
+import * as BookApiCalls from "./BooksAPI"
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -16,6 +17,26 @@ class BooksApp extends React.Component {
   }
 
 
+  componentDidMount(){
+    BookApiCalls.getAll().then(books => {
+        this.setState({books})
+
+    })
+}
+
+
+  updateBookShelf = (book , e ) => {
+
+    BookApiCalls.update(book , e).then(() => {
+
+      book.shelf = e;
+   this.setState(state => ({
+     books: state.books.filter(bk => bk.id !== book.id).concat([book])
+   }))
+})
+  }
+
+
   render() {
     return (
 
@@ -27,7 +48,7 @@ class BooksApp extends React.Component {
                 <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-                <BookShelf />
+                <BookShelf updateShelf={this.updateBookShelf}  books={this.state.books}/>
             </div>
           </div>
       )} />
