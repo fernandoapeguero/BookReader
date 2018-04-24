@@ -11,7 +11,7 @@ render(){
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
                     <div className="book-shelf-changer">
-                    <select value={books.shelfs} onChange={(event) => this.props.changeShelf(books.id , event.target.value)}>
+                    <select value={books.shelfs} onChange={(event) => this.props.changeShelf(books , event.target.value)}>
                         <option value="none" >Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>

@@ -18,20 +18,17 @@ class BookShelf extends Component {
         })
     }
 
-      updateBookShelf = (bookid , e ) => {
+      updateBookShelf = (book , e ) => {
 
-        const books = this.state.books.filter(book => book.id === bookid)[0];
-        books.shelf = e;
-        BookApiCalls.update(bookid , e).then(data => {
-        this.setState(this.state).then(newBooks =>{
+        BookApiCalls.update(book , e).then(() => {
 
-        books: books.concat(books);
-        })
-
+          book.shelf = e;
+       this.setState(state => ({
+         books: state.books.filter(bk => bk.id !== book.id).concat([book])
+       }))
     })
 
 }
-
 render(){
 
   return(
