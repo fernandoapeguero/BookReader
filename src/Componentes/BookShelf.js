@@ -18,14 +18,19 @@ class BookShelf extends Component {
         })
     }
 
-    updateBookShelf = (bookid , e ) => {
-        let temp = this.state.books;
-       const book = this.state.books.filter(b => b.id === bookid);
-       book.shelf = e.target.value;
-        BookApiCalls.update(book , e.target.value).then(data => {
-            this.setState({books: temp})
-        })
-    }
+      updateBookShelf = (bookid , e ) => {
+   console.log(e);
+    const books = this.state.books.filter(book => book.id === bookid)[0];
+    books.shelf = e;
+    BookApiCalls.update(bookid , e).then(data => {
+    this.setState(this.state).then(newBooks =>{
+
+       books: books.concat(books);
+     })
+
+    })
+
+}
 
 render(){
 
@@ -34,7 +39,7 @@ render(){
     <div  className="bookshelf">
        <h2 className="bookshelf-title">Currently Reading</h2>
        <div className="bookshelf-books">
-          <BookList allBooks={this.state.books.filter(book => book.shelf === 'currentlyReading')} changeShelf={this.updateBookShelf} />
+          <BookList allBooks={this.state.books.filter(book => book.shelf === "currentlyReading")} changeShelf={this.updateBookShelf} />
        </div>
     </div>
     <div className="bookshelf">
