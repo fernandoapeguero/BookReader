@@ -17,17 +17,20 @@ class BookSearch extends Component {
             }).catch(err => {
                 console.log(err + 'this happen')
             })
-
         }
-
     }
+
+    getshelfinfoSearch = (book , e ) => {
+        this.props.updateShelf(book , e)
+        }
 
 render(){
 
     return(
-      <div className="search-books">
+        <div className="search-books">
         <div className="search-books-bar">
-            <Link className="close-search" to="/" >Close</Link>
+            <Link className="close-search" to="/" >
+            Close</Link>
             <div className="search-books-input-wrapper">
                 {/*
                 NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -37,21 +40,19 @@ render(){
                 you don't find a specific author or title. Every search is limited by search terms.
                 */}
                 <input
-                type="text"
-                placeholder="Search by title or author"
-                value={this.state.query}
-                onChange={(event) => {this.onQueryUpdate(event.target.value)}}
+                    type="text"
+                    placeholder="Search by title or author"
+                    value={this.state.query}
+                    onChange={(event) => {this.onQueryUpdate(event.target.value)}}
                 onSubmit={(event) => {this.callToApi(event.target.value)}}/>
             </div>
         </div>
         <div className="search-books-results">
-
             {this.state.query.length > 0 && (
-               <BookLists allBooks={this.state.books}/>
+            <BookLists allBooks={this.state.books}  changeShelf={this.getshelfinfoSearch}/>
             )}
         </div>
         </div>
-
     )
 }
 

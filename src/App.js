@@ -53,9 +53,11 @@ class BooksApp extends React.Component {
           </div>
       )} />
 
-      <Route path="/Search" render={(history)=> (
-           <BooksSearch />
+      <Route path="/Search" render={({history})=> (
+           <BooksSearch updateShelf={this.updateBookShelf} changeShelf={(book , e) => {
+             this.updateBookShelf(book, e)
 
+           }} />
     )}/>
     </div>
 
