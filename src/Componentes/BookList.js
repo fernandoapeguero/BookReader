@@ -1,19 +1,25 @@
-import React, {Component} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-class BooksList extends Component {
+const BooksList = (props) => {
 
-render(){
+   BooksList.PropTypes = {
+
+      allBooks: PropTypes.array.isRequired
+
+    }
+
     return(
      <ol className="books-grid">
-        { this.props.allBooks.map((books , index) => {
+        {props.allBooks.map((books , index) => {
         return   <li key={index}>
                     <div className="book">
                         <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}>
+                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks !== undefined ? books.imageLinks.thumbnail : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmYm-bXe-K0ZCH-RoQ5cxzgyBy6w8XEtGPq-cHX1o6XpASE_5Gfw"})` }}>
                         </div>
                         <div className="book-shelf-changer">
-                            <select value={books.shelfs} onChange={(event) =>
-                                this.props.changeShelf(books , event.target.value)}>
+                            <select value={books.shelf} onChange={(event) =>
+                                props.changeShelf(books , event.target.value)}>
                                 <option value="none" >Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -27,9 +33,7 @@ render(){
                     </div>
                 </li>
             })}
-     </ol>
-    )
- }
+     </ol>)
 }
 
 export default BooksList
