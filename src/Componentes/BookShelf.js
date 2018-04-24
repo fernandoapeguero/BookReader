@@ -19,14 +19,14 @@ class BookShelf extends Component {
     }
 
       updateBookShelf = (bookid , e ) => {
-   console.log(e);
-    const books = this.state.books.filter(book => book.id === bookid)[0];
-    books.shelf = e;
-    BookApiCalls.update(bookid , e).then(data => {
-    this.setState(this.state).then(newBooks =>{
 
-       books: books.concat(books);
-     })
+        const books = this.state.books.filter(book => book.id === bookid)[0];
+        books.shelf = e;
+        BookApiCalls.update(bookid , e).then(data => {
+        this.setState(this.state).then(newBooks =>{
+
+        books: books.concat(books);
+        })
 
     })
 
